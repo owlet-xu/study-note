@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <div>
+    name: <input id="name" />
+  </div>
+</html>
+<script>
+// 监听Model下的name属性，当name属性有变化时要引起页面id=name的响应变化
+const model = {
+  name: 'vue',
+};
+// 利用Object.defineProperty创建一个监听器
+function observe(obj) {
+  let val = obj.name;
+  Object.defineProperty(obj, 'name', {
+    get() {
+      return val;
+    },
+    set(newVal) {
+      // 当有新值设置时，执行setter
+      console.log(`name变化：从${val}到${newVal}`);
+      // 解析到页面
+      compile(newVal);
+      val = newVal;
+    }
+  })
+}
+// 解析器，将变化的数据响应到页面上
+function compile(val) {
+  document.querySelector('#name').value = val;
+}
+// 调用监听器，对model开始监听
+observe(model);
+</script>

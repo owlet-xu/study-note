@@ -1,0 +1,50 @@
+<html>
+
+<body>
+    <div>
+        name: <input id="name" />
+        age: <input id="age" />
+    </div>
+    <script>
+        // 与页面绑定
+        const data = {
+            name: '张三',
+            age: 30
+        }
+
+        // 暴露到外部，便于查看效果
+        window.data = data;
+        window.myProxy = new Proxy(data, {
+            set(target, propKey, value) {
+                // 改变数据Model时修改页面
+                if (propKey === 'name') {
+                    document.getElementById('name').value = value;
+                } else if (propKey === 'age') {
+                    document.getElementById('age').value = value;
+                }
+                // Reflect.set(...arguments);
+            },
+        });
+
+        // 页面变化改变Model内数据
+        document.getElementById('name').onchange = function (e) {
+            Reflect.set(data, 'name', e.target.value); // 不会触发set，但是会改变myProxy
+            console.log(window.myProxy.name);
+        }
+        document.getElementById('age').onchange = function (e) {
+            Reflect.set(data, 'age', e.target.value);
+            console.log(window.myProxy.age);
+        }
+
+        setTimeout(() => {
+            window.myProxy.name = '张三'; // 会触发set
+            window.myProxy.age = 30;
+            Reflect.set(data, 'name', '李四'); // 不会触发set，但是会改变myProxy
+            Reflect.set(data, 'age', 25);
+            console.log(window.myProxy.name);
+            console.log(window.myProxy.age);
+        }, 2000);
+    </script>
+</body>
+
+</html>

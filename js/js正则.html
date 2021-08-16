@@ -6,12 +6,30 @@
   </head>
   <body>
     <button onclick="getAvCard()">解析番号</button>
+	<button onclick="test()">排除&,%</button>
     <script type="text/javascript">
       function getAvCard() {
        var name = 'RHJ129.x264中文.mp4_1528967558.srt';
        var a = name.match(/[a-zA-Z0-9\-]+/g);
        console.log(a);
+	   
+
       }
+	  function test() {
+	   var name1 = '%aaa';
+	   var name2 = 'aaa%';
+	   var name3 = 'aa&a';
+	   var name4 = '%aaa%';
+	   var name5 = '%a&&aa%';
+	   
+       var reg = new RegExp('[&, %]+');
+       console.log(reg.test(name1));
+	   console.log(reg.test(name2));
+	   console.log(reg.test(name3));
+	   console.log(reg.test(name4));
+	   console.log(reg.test(name5));
+	  }
+	  
     </script>
   </body>
 </html>

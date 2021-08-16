@@ -2,18 +2,37 @@ https://my.oschina.net/monroe/blog/1826556
 
 
 
+## 修改git登录
+
+```
+#1、修改或者删除凭据 控制面板\用户帐户\凭据管理器
+#2、修改用户名，邮箱，密码
+git config --global user.name "owlet-xu"
+git config --global user.email "1522915316@qq.com"
+git config --global user.password "xxxx"
+```
+
+
+
+## https导致ssl验证问题解决：设置取消ssl验证
+
+```
+git config --global http.sslVerify false
+```
+
+
+
+
+
 ## git使用指令
 
-// https导致ssl验证问题解决：设置取消ssl验证
-git config --global http.sslVerify false
-
-git clone https://101.133.208.118/scm/cad-client/cad-quality-shell.git
+git clone https://xxx.xxx.xxx.xxx.git
 // 重置用户和邮箱
 git config --global user.name "xuguoyuan"
-git config --global user.email "xuguoyuan@gsafety.com"
+git config --global user.email "xuguoyuan@owlet.com"
 
 git config --global --replace-all user.name "xuguoyuan"
-git config --global --replace-all user.email "xuguoyuan@gsafety.com" 
+git config --global --replace-all user.email "xuguoyuan@owlet.com" 
 
 // 修改或者删除凭据
 进入，删除凭据或者修改凭据
@@ -26,12 +45,12 @@ git config --global --replace-all user.email "xuguoyuan@gsafety.com"
 ### 1 生成密钥
 
 ```shell
-ssh-keygen -t ed25519 -C "xuguoyuan@gsafety.com"
+ssh-keygen -t ed25519 -C "xuguoyuan@owlet.com"
 ```
 
 路径是默认的即可  记住名称/c/Users/xuguoyuan/.ssh/id_ed25519
 
-输入密码 18255153428xgy
+输入密码 xxxxxxx
 
 ### 2 启动服务
 
@@ -60,24 +79,7 @@ clip < ~/.ssh/id_ed25519.pub
 ### 5 本地仓库链接远程仓库
 
 ```shell
-ssh -T gogs.gsafety.com
+ssh -T gogs.owlet.com
 ```
 
 输入密码
-
-
-
-// https导致ssl验证问题解决：设置取消ssl验证
-git config --global http.sslVerify false
-
-git clone https://101.133.208.118/scm/cad-client/cad-quality-shell.git
-// 重置用户和邮箱
-git config --global user.name "xuguoyuan"
-git config --global user.email "xuguoyuan@gsafety.com"
-
-git config --global --replace-all user.name "xuguoyuan"
-git config --global --replace-all user.email "xuguoyuan@gsafety.com" 
-
-// 修改或者删除凭据
-进入，删除凭据或者修改凭据
-控制面板\用户帐户\凭据管理器

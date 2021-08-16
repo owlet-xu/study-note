@@ -1,0 +1,39 @@
+<html>
+
+<body>
+  <a href="https://juejin.cn/post/6844904097544405000">参考资料</a>
+  <input id="name"></input>
+  <script>
+    var data = {
+      name: '你好'
+    };
+    var temp = ''; // 在set get 的缓存，不然会引起死循环
+    // Data Bindings
+    Object.defineProperty(data, 'name', {
+      get: function () {
+        return temp;
+      },
+      set: function (newValue) {
+        // 页面响应处理
+        document.getElementById('name').value = newValue;
+        temp = newValue;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    // 页面DOM listener
+    document.getElementById('name').onchange = function (e) {
+      data.name = e.target.value;
+      console.log(data.name);
+    }
+    setTimeout(() => {
+      data.name = '第一次';
+      console.log(this.data.name);
+    }, 2000);
+
+
+
+  </script>
+</body>
+
+</html>
